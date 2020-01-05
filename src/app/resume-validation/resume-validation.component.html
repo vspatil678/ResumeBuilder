@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+        <mat-toolbar-row>
+                <span>Errors in Resume</span>
+                <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon" (click)="this.onClose()" >close</mat-icon>
+        </mat-toolbar-row>
+</mat-toolbar>
+<div class="container">
+    <div *ngFor="let error of this.errors">
+        {{error}}
+    </div>
+</div>

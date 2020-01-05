@@ -1,0 +1,42 @@
+.example-icon {
+    padding: 0 14px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .backg-color {
+      background: #007bff;
+      color: cornsilk;
+  }
+
+  .card-padding {
+      padding-top: 2%;
+      padding-bottom: 2%;
+  }
+
+  .row-padding {
+      padding-top: 1%;
+  }
+
+  .right-item {
+    position: absolute;
+    left: 95%;
+    top: 0;
+  }
+
+  .other-details-area {
+      padding-left: 1%;
+      padding-right: 1%;
+      width: 95%;
+      height: 150px;
+  }
+
+  .fixed-size-button {
+      width: 100%
+  }
+
+  .delete-icon {
+      cursor: pointer;
+  }

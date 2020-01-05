@@ -1,0 +1,8 @@
+.example-icon {
+    padding-left: 60%;
+    cursor: pointer;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }

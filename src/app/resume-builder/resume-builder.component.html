@@ -1,0 +1,221 @@
+<mat-toolbar>
+    <mat-toolbar-row class="backg-color">
+        <span>Online Resume Builder</span>
+        <span class="example-spacer"></span>
+        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
+        <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div style="padding-left: 1%">
+    <div class="row">
+        <div class="col-md-9">
+            <br>
+            <form [formGroup]="resumeForm">
+                <mat-card class="card-padding">
+                    <mat-card-header>
+                        <div mat-card-avatar>
+                            <mat-icon><i class="material-icons">account_circle</i></mat-icon>
+                        </div>
+                        <mat-card-title>Personal Details</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" formControlName="Name" placeholder="Name">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="tel" class="form-control" formControlName="ContactNumber"
+                                    placeholder="Contact Number">
+                            </div>
+                        </div>
+                        <div class="row row-padding">
+                            <div class="col-md-6">
+                                <textarea class="form-control" formControlName="Address"
+                                    placeholder="Address"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <input type="email" class="form-control" formControlName="Email"
+                                        placeholder="Email Id">
+                                </div>
+                                <div class="row row-padding">
+                                    <input type="text" class="form-control" formControlName="SocialProfile"
+                                        placeholder="Social Profile">
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <br>
+                <mat-card class="card-padding">
+                    <mat-card-header>
+                        <div mat-card-avatar>
+                            <mat-icon><i class="material-icons"> timeline </i></mat-icon>
+                        </div>
+                        <mat-card-title>Skills</mat-card-title>
+                        <button class="right-item btn btn-primary" (click)="onAddSkills()">+</button>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div formArrayName="Skills" *ngFor="let skill of skills.controls; let i = index">
+                            <div [formGroupName]="i" class="row">
+
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" formControlName="Skill"
+                                        placeholder="Eg: java / angular">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="number" class="form-control" formControlName="Rating"
+                                        placeholder="Eg: 4 ( out of 5 )">
+                                </div>
+                                <div class="col" *ngIf="this.skills.length > 1" (click)="onRemoveSkills(i)">
+                                    <mat-icon class="delete-icon">delete</mat-icon>
+                                </div>
+
+                            </div>
+                            <br>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <br>
+                <mat-card class="card-padding">
+                    <mat-card-header>
+                        <div mat-card-avatar>
+                            <mat-icon><i class="material-icons"> timeline </i></mat-icon>
+                        </div>
+                        <mat-card-title>Experience</mat-card-title>
+                        <button class="right-item btn btn-primary" (click)="onAddExperience()">+</button>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div>
+                            <div formArrayName="Experience" *ngFor="let exp of experience.controls; let i = index">
+                                <div [formGroupName]="i">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" formControlName="Employer"
+                                                placeholder="Employer">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" formControlName="JobTitle"
+                                                placeholder="Job Title">
+                                        </div>
+                                    </div>
+                                    <div class="row row-padding">
+                                        <div class="col-md-6">
+                                            <textarea class="form-control" formControlName="JobDescription"
+                                                placeholder="Job Description"></textarea>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <input type="number" class="form-control"
+                                                formControlName="ExperienceInMonth" placeholder="Experience In Month">
+                                        </div>
+                                        <div class="col" *ngIf="this.experience.length > 1"
+                                            (click)="onRemoveExperience(i)">
+                                            <mat-icon class="delete-icon">delete</mat-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <br>
+                <mat-card class="card-padding">
+                    <mat-card-header>
+                        <div mat-card-avatar>
+                            <mat-icon><i class="material-icons">school</i></mat-icon>
+                        </div>
+                        <mat-card-title>Education</mat-card-title>
+                        <button class="right-item btn btn-primary" (click)="onAddEducation()">+</button>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div>
+                            <div formArrayName="Education" *ngFor="let exp of educationItems.controls; let i = index">
+                                <div [formGroupName]="i">
+                                    <div class="row">
+                                        <div class="col">
+                                            <select class="form-control" formControlName="Course">
+                                                <option [value]="" [selected]>select course</option>
+                                                <option *ngFor="let course of this.courses" [value]=course>{{course}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <input type="text" class="form-control" formControlName="School"
+                                                placeholder="School / College">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" formControlName="PassingYear"
+                                                placeholder="PassingYear">
+                                        </div>
+                                        <div class="col">
+                                            <input type="number" class="form-control" formControlName="Percentage"
+                                                placeholder="Percentage" max="100" min="35">
+                                        </div>
+                                        <div class="col">
+                                            <mat-icon *ngIf="this.educationItems.length > 1"
+                                                (click)="onRemoveEducation(i)" class="delete-icon">delete</mat-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <br>
+                <mat-card class="card-padding">
+                    <mat-card-header>
+                        <div mat-card-avatar>
+                            <mat-icon><i class="material-icons">list</i></mat-icon>
+                        </div>
+                        <mat-card-title>Other Details</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row" style="padding-right: 1%">
+                            <textarea [maxLength]="400" class="form-control other-details-area" formControlName="OtherDetails"></textarea>
+                        </div>
+
+                    </mat-card-content>
+                </mat-card>
+            </form>
+        </div>
+        <div class="col-md-3">
+            <mat-card>
+                <!-- disabled="!this.resumeForm.valid" -->
+                <div class="row row-padding">
+                    <button type="button" class="btn btn-primary fixed-size-button"
+                        (click)="this.onPdf(this.resumeForm.value,'open')">Open PDF</button>
+                </div>
+                <div class="row row-padding">
+                    <button type="button" class="btn btn-primary fixed-size-button"
+                        (click)="this.onPdf(this.resumeForm.value,'download')">Download PDF</button>
+                </div>
+                <div class="row row-padding">
+                    <button type="button" class="btn btn-primary fixed-size-button">Send to Mail as PDF</button>
+                </div>
+                <div class="row row-padding">
+                    <button type="button" class="btn btn-primary fixed-size-button" (click)="onReset()">Reset</button>
+                </div>
+            </mat-card>
+            <br>
+            <mat-card>
+                <h4>Show your picture in Resume</h4>
+                <div class="row">
+                    <input type="file" (change)="this.onFileChanged($event)">
+                </div>
+            </mat-card>
+            <br>
+            <!-- <mat-card *ngIf="displayQrCode">
+                <ngx-qrcode #qrCodeCanvas id="qrCodeImage" [qrc-element-type]="elementType" [qrc-value] = "qrCodeValue" canvas="qrCodeCanvas">    
+                </ngx-qrcode>
+                <span> Please verify your name and phone number by scanning this qr image</span>
+            </mat-card> -->
+            <mat-card *ngIf="displayQrCode" >
+                <ngx-kjua [text]="qrCodeValue" [size]="100"></ngx-kjua>
+                <span> Please verify your name and phone number by scanning this qr image</span>
+            </mat-card>
+
+        </div>
+    </div>
+</div>
