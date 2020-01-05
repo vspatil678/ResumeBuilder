@@ -56,9 +56,11 @@
                         <button class="right-item btn btn-primary" (click)="onAddSkills()">+</button>
                     </mat-card-header>
                     <mat-card-content>
-                        <div formArrayName="Skills" *ngFor="let skill of skills.controls; let i = index">
-                            <div [formGroupName]="i" class="row">
-
+                        <div formArrayName="Skills" *ngFor="let skill of skills.controls; let i = index" cdkDropList (cdkDropListDropped)="drop($event)">
+                            <div [formGroupName]="i" class="row" cdkDrag>
+                                <div class="col delete-icon" *ngIf="this.skills.length > 1" (click)="onRemoveSkills(i)">
+                                    <i class="material-icons">drag_indicator</i>
+                                </div>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" formControlName="Skill"
                                         placeholder="Eg: java / angular">

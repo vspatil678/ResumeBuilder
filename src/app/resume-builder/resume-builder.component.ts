@@ -14,6 +14,7 @@ import 'jspdf-autotable';
 //  import jsPDF from 'jspdf';
 import * as autoTable from 'jspdf-autotable';
 import { config } from 'rxjs';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-resume-builder',
   templateUrl: './resume-builder.component.html',
@@ -345,6 +346,10 @@ private buildResumeAsPDF(data: Resume): jsPDF {
     doc.addImage(barCodeData, 'JPG', 20, otherDetailsLineNumbers + 10, 40, 40);
     // doc.output('dataurlnewwindow'); // works ok but opening in new tab
     return doc;
+}
+
+drop(event: CdkDragDrop<string[]>) {
+  moveItemInArray(this.skills, event.previousIndex, event.currentIndex);
 }
 
 private getBarcodeData(text: string, sizeOfQr = 900) {
